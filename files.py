@@ -23,11 +23,11 @@ def clear_file_data(file_name):
         pass
 
 
-def file_to_set(file_name):
-    results = set()
+def file_to_list(file_name):
+    results = list()
     with open(file_name, 'r') as f:
         for line in f:
-            results.add(line.replace('\n', ''))
+            results.append(line.replace('\n', ''))
     return results
 
 
