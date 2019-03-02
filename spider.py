@@ -1,5 +1,7 @@
 from googlesearch import GoogleSearch
 import files
+import pdfDownloading
+import threading
 
 
 class Spider:
@@ -23,3 +25,9 @@ class Spider:
 
             files.append_data(pdf, self.search + "/PDFs.txt")
             count += 1
+
+    def sort_pdfs(self):
+        pdf_links = files.file_to_list(self.search + "/PDFs.txt")
+        for pdf in pdf_links:
+            pdfDownloading.download_file(pdf)
+
