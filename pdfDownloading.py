@@ -10,9 +10,8 @@ PDF_LINKS = ["http://file.allitebooks.com/20181202/Amazon%20Web%20Services%20in%
 PDF_NAMES = ["Amazon Web Services in Action, 2nd Edition","Another name","PostGIS Cookbook","Beginning REALbasic","DNS in Action"]
 
 
-NAME_LIST = [] #names of the pdfs
-SIZE_LIST = [] #size of words inside pdf
-
+NAME_LIST = []  # names of the pdfs
+SIZE_LIST = []  # size of words inside pdf
 
 
 def download_file(pdf_link):
@@ -23,7 +22,6 @@ def download_file(pdf_link):
     end = time.time()
     print(end - start)
     return req
-
 
 
 def get_number_of_lines(pdf_info):
@@ -47,6 +45,7 @@ def get_number_of_lines(pdf_info):
 
     return number_of_lines
 
+"""
 if __name__ == '__main__':
     print("App starts")
     app_start = time.time()
@@ -70,3 +69,4 @@ if __name__ == '__main__':
     app_end = time.time()
     print(app_end-app_start)
     print(SIZE_LIST)
+"""
