@@ -41,7 +41,7 @@ class Spider:
 
         # threads go here
         for i in range(0, THREADS_NUM):
-            self.threads_list.append(threading.Thread(target=self.work, args=(pdf_links[i])))
+            self.threads_list.append(threading.Thread(target=self.work, args=(pdf_links[i],)))
 
         for thread in self.threads_list:
             thread.daemon = True
