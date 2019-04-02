@@ -46,6 +46,10 @@ class Spider:
         for thread in self.threads_list:
             thread.daemon = True
             thread.start()
+
+        for thread in self.threads_list:
+            thread.join()
+
         """
         for pdf in pdf_links:
             self.work(pdf)
