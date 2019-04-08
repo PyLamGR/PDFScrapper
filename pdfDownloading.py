@@ -1,7 +1,5 @@
-import io
 import PyPDF2
 import requests
-import time
 
 
 s = requests.Session()
@@ -10,43 +8,43 @@ PDF_LINKS = ["http://file.allitebooks.com/20181202/Amazon%20Web%20Services%20in%
 PDF_NAMES = ["Amazon Web Services in Action, 2nd Edition","Another name","PostGIS Cookbook","Beginning REALbasic","DNS in Action"]
 
 
-NAME_LIST = [] #names of the pdfs
-SIZE_LIST = [] #size of words inside pdf
-
+NAME_LIST = []  # names of the pdfs
+SIZE_LIST = []  # size of words inside pdf
 
 
 def download_file(pdf_link):
-    print("request time")
-    start = time.time()
+    # print("request time")
+    # start = time.time()
     req = s.get(pdf_link)
 
-    end = time.time()
-    print(end - start)
+    # end = time.time()
+    # print(end - start)
     return req
-
 
 
 def get_number_of_lines(pdf_info):
     # This function takes as input a pdf and returns the number of lines found in that pdf
     number_of_lines = 0
     # cProfile.run('re.compile("get_number_of_lines|pdg_info")')
-    print("time to open pdf")
-    start = time.time()
+    # print("time to open pdf")
+    # start = time.time()
     pdf_info = PyPDF2.PdfFileReader(pdf_info)
-    end = time.time()
-    print(end-start)
-    print("time to execute tast")
-    start = time.time()
+    # end = time.time()
+    # print(end-start)
+    # print("time to execute tast")
+    # start = time.time()
     for page in range(pdf_info.getNumPages()):
         file_info = pdf_info.getPage(page)
         content = file_info.extractText()
         count_escape_char = content.count('\n')
         number_of_lines = number_of_lines + count_escape_char
-    end = time.time()
-    print(end - start)
+    # end = time.time()
+    # print(end - start)
 
     return number_of_lines
 
+
+"""
 if __name__ == '__main__':
     print("App starts")
     app_start = time.time()
@@ -70,3 +68,4 @@ if __name__ == '__main__':
     app_end = time.time()
     print(app_end-app_start)
     print(SIZE_LIST)
+"""
