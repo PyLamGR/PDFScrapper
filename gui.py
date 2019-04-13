@@ -15,6 +15,17 @@ link = Label(root, text="Google Hyperlink", fg="blue", cursor="hand2")
 link.pack()
 link.bind("<Button-1>", callback)
 root.mainloop()
+
+OR
+
+from tkinter import *
+import webbrowser
+
+root = Tk()
+link = Label(root, text="http://stackoverflow.com", fg="blue", cursor="hand2")
+link.pack()
+link.bind("<Button-1>", lambda event: webbrowser.open(link.cget("text")))
+root.mainloop()
 """
 
 
@@ -27,7 +38,6 @@ def run():
     # methods
     def search():
         data = str(search_data.get())
-        print(data)
         spider = Spider(data)
         spider.gather_pdfs()
         spider.sort_pdfs()
