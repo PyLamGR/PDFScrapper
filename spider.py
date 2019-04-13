@@ -5,9 +5,6 @@ import threading
 import io
 
 
-THREADS_NUM = 10
-
-
 class Spider:
 
     def __init__(self, search):
@@ -37,11 +34,11 @@ class Spider:
             self.size_list.append(pdfDownloading.get_number_of_lines(response))
 
     def sort_pdfs(self):
-        pdf_links = files.file_to_list(self.search + "/PDFs.txt")
+        # pdf_links = files.file_to_list(self.search + "/PDFs.txt")
 
         # threads go here
-        for i in range(0, THREADS_NUM):
-            self.threads_list.append(threading.Thread(target=self.work, args=(pdf_links[i],)))
+        for i in range(0, len(self.pdfs)):
+            self.threads_list.append(threading.Thread(target=self.work, args=(self.pdfs[i],)))
 
         for thread in self.threads_list:
             thread.daemon = True
@@ -51,10 +48,12 @@ class Spider:
             thread.join()
 
         """
-        for pdf in pdf_links:
+        for pdf in self.pdfs:
             self.work(pdf)
         """
 
+        print(self.size_list)
+        print(self.pdfs)
         self.size_list, self.pdfs = (list(t) for t in zip(*sorted(zip(self.size_list, self.pdfs))))
         self.size_list.reverse()
         self.pdfs.reverse()
