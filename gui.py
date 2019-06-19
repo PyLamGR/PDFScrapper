@@ -40,7 +40,13 @@ def run():
         data = str(search_data.get())
         spider = Spider(data)
         spider.gather_pdfs()
+<<<<<<< Updated upstream
         # spider.sort_pdfs()
+=======
+       
+        #spider.sort_pdfs()
+        
+>>>>>>> Stashed changes
 
         notification_label = Label(root, text="You Can Copy the Links")
         notification_label.grid(row=3)

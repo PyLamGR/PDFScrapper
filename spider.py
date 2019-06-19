@@ -1,6 +1,6 @@
 from googlesearch import GoogleSearch
 import files
-import pdfDownloading
+from pdfDownloading import *
 import threading
 import io
 
@@ -20,6 +20,7 @@ class Spider:
         google.query(self.search)
         google.get_results()
         self.pdfs = google.get_pdfs()
+        print(self.pdfs)
 
         count = 0
         for pdf in self.pdfs:
@@ -30,34 +31,23 @@ class Spider:
             count += 1
 
     def work(self, pdf_link):
-        with io.BytesIO(pdfDownloading.download_file(pdf_link).content) as response:
-            self.size_list.append(pdfDownloading.get_number_of_lines(response))
+        #with io.BytesIO(pdfDownloading.download_file(pdf_link).content) as response:
+            #self.size_list.append(pdfDownloading.get_number_of_lines(response))
+        for link in pdf_link:
+            with io.BytesIO(download_file(link).content) as response:
+                self.size_list.append(get_number_of_lines(response))
+        print(self.size_list)
+        print(self.pdfs)
 
     def sort_pdfs(self):
         # pdf_links = files.file_to_list(self.search + "/PDFs.txt")
 
-        # threads go here
-        for i in range(0, len(self.pdfs)):
-            self.threads_list.append(threading.Thread(target=self.work, args=(self.pdfs[i],)))
-
-        for thread in self.threads_list:
-            thread.daemon = True
-            thread.start()
-
-        for thread in self.threads_list:
-            thread.join()
-
-        """
-        for pdf in self.pdfs:
-            self.work(pdf)
-        """
-
-        # print(self.size_list)
-        # print(self.pdfs)
+        self.work(self.pdfs)
+    
 
         self.size_list, self.pdfs = (list(t) for t in zip(*sorted(zip(self.size_list, self.pdfs))))
         self.size_list.reverse()
         self.pdfs.reverse()
 
-        # print(self.pdfs)
-        # print(self.size_list)
+        print(self.pdfs)
+        print(self.size_list)
