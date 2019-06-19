@@ -33,17 +33,24 @@ def run():
 
     root = Tk()
     root.title("PDF-Scrapper")
-    root.geometry("300x100")
+    root.geometry("800x300")    # original: 300x100
 
     # methods
     def search():
         data = str(search_data.get())
         spider = Spider(data)
         spider.gather_pdfs()
-        spider.sort_pdfs()
+        # spider.sort_pdfs()
 
-        notification_label = Label(root, text="Check The Program's Folder for the PDFs!")
+        notification_label = Label(root, text="You Can Copy the Links")
         notification_label.grid(row=3)
+
+        pdf_text = Text(root, fg="blue")
+
+        for pdf in spider.pdfs:
+            pdf_text.insert(END, '- ' + pdf + '\n\n')
+
+        pdf_text.grid(row=4)
 
     # entries
     search_data = StringVar()
