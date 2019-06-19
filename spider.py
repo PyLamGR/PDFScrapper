@@ -52,11 +52,12 @@ class Spider:
             self.work(pdf)
         """
 
-        print(self.size_list)
-        print(self.pdfs)
+        # print(self.size_list)
+        # print(self.pdfs)
+
         self.size_list, self.pdfs = (list(t) for t in zip(*sorted(zip(self.size_list, self.pdfs))))
         self.size_list.reverse()
         self.pdfs.reverse()
 
-        print(self.pdfs)
-        print(self.size_list)
+        # print(self.pdfs)
+        # print(self.size_list)
